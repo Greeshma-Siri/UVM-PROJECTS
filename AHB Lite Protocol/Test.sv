@@ -3,7 +3,6 @@ class ahb_lite_base_test extends uvm_test;
     `uvm_component_utils(ahb_lite_base_test)
     
     ahb_lite_env env;
-    ahb_lite_agent_config cfg;
     
     function new(string name, uvm_component parent);
         super.new(name, parent);
@@ -15,15 +14,8 @@ class ahb_lite_base_test extends uvm_test;
         // Create environment
         env = ahb_lite_env::type_id::create("env", this);
         
-        // Create and configure agent
-        cfg = ahb_lite_agent_config::type_id::create("cfg");
-        if (!uvm_config_db#(virtual ahb_lite_if)::get(this, "", "ahb_lite_vif", cfg.vif)) begin
-            `uvm_fatal("BUILD", "Cannot get AHB-Lite interface from config DB")
-        end
-        cfg.is_active = UVM_ACTIVE;
-        
-        uvm_config_db#(ahb_lite_agent_config)::set(this, "env.agent", "ahb_lite_agent_config", cfg);
     endfunction
+    
     
     virtual function void report_phase(uvm_phase phase);
         uvm_report_server server;
