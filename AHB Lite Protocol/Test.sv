@@ -43,7 +43,7 @@ endclass
 
 
 class random_test extends ahb_lite_base_test;
-    `uvm_component_utils(comprehensive_random_test)
+    `uvm_component_utils(random_test)
     
     function new(string name, uvm_component parent);
         super.new(name, parent);
@@ -55,7 +55,7 @@ class random_test extends ahb_lite_base_test;
         random_mixed_sequence mixed_seq;
         
         phase.raise_objection(this);
-        `uvm_info("TEST", "Starting comprehensive random test", UVM_LOW)
+        `uvm_info("TEST", "Starting random test", UVM_LOW)
         
         // Random writes
         write_seq = random_write_sequence::type_id::create("write_seq");
