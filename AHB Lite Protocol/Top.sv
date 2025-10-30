@@ -39,18 +39,11 @@ module tb_top;
         ahb_if.HRESETn = 1;
     end
     
-    // Connect interface to DUT signals
     initial begin
-        ahb_if.HRESETn = HRESETn;
-    end
-    
-    // UVM test setup
-    initial begin
-        // Put virtual interface in config DB
-        uvm_config_db#(virtual ahb_lite_if)::set(null, "uvm_test_top", "ahb_lite_vif", ahb_if);
+        uvm_config_db#(virtual ahb_lite_if)::set(null, "uvm_test_top.env", "ahb_lite_vif", ahb_if);
         
         // Run test
-      run_test("random_test");
+        run_test("random_test");
     end
     
     // End simulation after timeout
@@ -58,13 +51,5 @@ module tb_top;
         #10000;
         $display("Simulation timeout - stopping test");
         $finish;
-    end
-    
-    // Waveform dumping
-    initial begin
-        if ($test$plusargs("wave")) begin
-            $dumpfile("ahb_lite_waves.vcd");
-            $dumpvars(0, tb_top);
-        end
     end
 endmodule
