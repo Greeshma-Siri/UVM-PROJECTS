@@ -1,4 +1,4 @@
-class trans extends uvm_sequence_item;
+class ahb_lite_seq_item extends uvm_sequence_item;
   `uvm_object_utils(trans)
     
     // Address Phase
