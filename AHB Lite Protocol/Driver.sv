@@ -1,8 +1,7 @@
-class ahb_lite_driver extends uvm_driver #(trans);
+class ahb_lite_driver extends uvm_driver #(ahb_lite_seq_item);
     `uvm_component_utils(ahb_lite_driver)
     
     virtual ahb_lite_if.master_mp vif;
-    ahb_lite_agent_config cfg;
     
     function new(string name, uvm_component parent);
         super.new(name, parent);
@@ -10,15 +9,11 @@ class ahb_lite_driver extends uvm_driver #(trans);
     
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
-        if (!uvm_config_db#(ahb_lite_agent_config)::get(this, "", "ahb_lite_agent_config", cfg)) begin
-            `uvm_fatal("BUILD", "Cannot get agent config")
+        if (!uvm_config_db#(virtual ahb_lite_if)::get(this, "", "ahb_lite_vif", vif)) begin
+            `uvm_fatal("BUILD", "Cannot get AHB-Lite interface in driver")
         end
     endfunction
     
-    virtual function void connect_phase(uvm_phase phase);
-        super.connect_phase(phase);
-        vif = cfg.vif;
-    endfunction
     
     virtual task run_phase(uvm_phase phase);
         reset_signals();
