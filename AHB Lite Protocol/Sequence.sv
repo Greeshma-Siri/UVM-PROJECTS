@@ -81,7 +81,6 @@ class random_mixed_sequence extends ahb_lite_base_sequence;
     `uvm_object_utils(random_mixed_sequence)
     
     rand int num_transactions;
-    }
     
     function new(string name = "random_mixed_sequence");
         super.new(name);
