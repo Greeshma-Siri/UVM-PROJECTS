@@ -14,7 +14,7 @@ module ahb_lite_slave (
 );
 
     // Internal memory
-    reg [31:0] memory [0:1023];
+    reg [31:0] memory [0:1023]; //1kb memory(1024)
     
     // Internal signals
     reg [31:0] haddr_reg;
@@ -43,7 +43,7 @@ module ahb_lite_slave (
             if (htrans_reg[1] && HREADYOUT) begin  // Only for valid transfers
                 if (hwrite_reg) begin
                     // Write operation
-                    if (haddr_reg < MEM_SIZE) begin
+                    if (haddr_reg < 1024) begin
                         case (hsize_reg)
                             3'b000: memory[haddr_reg][7:0]   <= HWDATA[7:0];    // Byte
                             3'b001: memory[haddr_reg][15:0]  <= HWDATA[15:0];   // Half-word
@@ -57,7 +57,7 @@ module ahb_lite_slave (
                 end 
                 else begin
                     // Read operation
-                    if (haddr_reg < MEM_SIZE) begin
+                    if (haddr_reg < 1024) begin
                         HRDATA <= memory[haddr_reg];
                         HRESP <= 1'b0; // OKAY
                     end 
