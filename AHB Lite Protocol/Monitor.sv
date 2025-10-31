@@ -2,7 +2,6 @@ class ahb_lite_monitor extends uvm_monitor;
     `uvm_component_utils(ahb_lite_monitor)
     
     virtual ahb_lite_if.monitor_mp vif;
-    ahb_lite_agent_config cfg;
     uvm_analysis_port #(ahb_lite_seq_item) item_collected_port;
     
     function new(string name, uvm_component parent);
@@ -12,14 +11,10 @@ class ahb_lite_monitor extends uvm_monitor;
     
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
-        if (!uvm_config_db#(ahb_lite_agent_config)::get(this, "", "ahb_lite_agent_config", cfg)) begin
-            `uvm_fatal("BUILD", "Cannot get agent config")
+        // Get virtual interface directly from config DB
+        if (!uvm_config_db#(virtual ahb_lite_if)::get(this, "", "ahb_lite_vif", vif)) begin
+            `uvm_fatal("BUILD", "Cannot get AHB-Lite interface in monitor")
         end
-    endfunction
-    
-    virtual function void connect_phase(uvm_phase phase);
-        super.connect_phase(phase);
-        vif = cfg.vif;
     endfunction
     
     virtual task run_phase(uvm_phase phase);
