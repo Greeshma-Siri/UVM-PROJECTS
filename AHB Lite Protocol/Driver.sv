@@ -9,11 +9,11 @@ class ahb_lite_driver extends uvm_driver #(ahb_lite_seq_item);
     
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
-        if (!uvm_config_db#(virtual ahb_lite_if)::get(this, "", "ahb_lite_vif", vif)) begin
+        // FIX: Use the same type with modport for both set and get
+        if (!uvm_config_db#(virtual ahb_lite_if.master_mp)::get(this, "", "ahb_lite_vif", vif)) begin
             `uvm_fatal("BUILD", "Cannot get AHB-Lite interface in driver")
         end
     endfunction
-    
     
     virtual task run_phase(uvm_phase phase);
         ahb_lite_seq_item req;
@@ -37,7 +37,7 @@ class ahb_lite_driver extends uvm_driver #(ahb_lite_seq_item);
         wait (vif.driver_cb.HRESETn === 1'b1);
     endtask
     
-  virtual task drive_transfer(ahb_lite_seq_item item);
+    virtual task drive_transfer(ahb_lite_seq_item item);
         `uvm_info("DRIVER", $sformatf("Starting transfer: %s", item.convert2string()), UVM_MEDIUM)
         
         // Wait for HREADY before starting new transfer
