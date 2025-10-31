@@ -1,5 +1,6 @@
 `include "uvm_macros.svh" 
 import uvm_pkg::*; 
+`include "Interface.sv"
  import tb_pkg::*; 
 
 module tb_top;
