@@ -23,6 +23,10 @@ class random_write_sequence extends ahb_lite_base_sequence;
     `uvm_object_utils(random_write_sequence)
     
     rand int num_transactions;
+
+    function new(string name = "random_write_sequence");
+        super.new(name);
+    endfunction
     
     virtual task body();
         `uvm_info("SEQ", $sformatf("Starting %0d random writes", num_transactions), UVM_LOW)
