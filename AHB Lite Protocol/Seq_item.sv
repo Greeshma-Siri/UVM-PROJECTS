@@ -33,7 +33,7 @@ class ahb_lite_seq_item extends uvm_sequence_item;
     endfunction
     
     function void do_copy(uvm_object rhs);
-        trans rhs_;
+        ahb_lite_seq_item rhs_;
         if (!$cast(rhs_, rhs)) begin
             `uvm_fatal("DO_COPY", "Cast failed")
             return;
