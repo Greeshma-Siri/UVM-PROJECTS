@@ -9,4 +9,5 @@ package tb_pkg;
   `include "Scoreboard.sv"
   `include "Coverage.sv"
   `include "Environment.sv"
+  `include "Test.sv"
 endpackage
