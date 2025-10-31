@@ -29,7 +29,7 @@ class ahb_lite_coverage extends uvm_subscriber #(ahb_lite_seq_item);
         
         // Size coverage
         size_cp: coverpoint cov_trans.hsize {
-            bins byte = {0};
+            bins byte1 = {0};
             bins halfword = {1};
             bins word = {2};
             illegal_bins illegal_sizes = {[3:7]};
