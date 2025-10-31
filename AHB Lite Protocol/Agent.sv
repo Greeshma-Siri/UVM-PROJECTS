@@ -5,8 +5,11 @@ class ahb_lite_agent extends uvm_agent;
     ahb_lite_driver      driver;
     ahb_lite_monitor     monitor;
     
+    uvm_analysis_port #(ahb_lite_seq_item) item_collected_port;
+    
     function new(string name, uvm_component parent);
         super.new(name, parent);
+        item_collected_port = new("item_collected_port", this);
     endfunction
     
     virtual function void build_phase(uvm_phase phase);
@@ -19,8 +22,11 @@ class ahb_lite_agent extends uvm_agent;
     
     virtual function void connect_phase(uvm_phase phase);
         super.connect_phase(phase);
-        if (driver != null) begin
-            driver.seq_item_port.connect(sequencer.seq_item_export);
-        end
+        
+        // Connect monitor analysis port to agent analysis port
+        monitor.item_collected_port.connect(item_collected_port);
+        
+        // Connect driver to sequencer
+        driver.seq_item_port.connect(sequencer.seq_item_export);
     endfunction
 endclass
