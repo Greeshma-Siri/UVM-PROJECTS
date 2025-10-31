@@ -41,7 +41,7 @@ module tb_top;
     end
     
     initial begin
-        uvm_config_db#(virtual ahb_lite_if)::set(null, "uvm_test_top.env", "ahb_lite_vif", ahb_if);
+     uvm_config_db#(virtual ahb_lite_if)::set(null, "uvm_test_top.env.agent.*", "ahb_lite_vif", ahb_if);
         
         // Run test
         run_test("random_test");
