@@ -16,8 +16,8 @@ class ahb_lite_driver extends uvm_driver #(ahb_lite_seq_item);
     
     
     virtual task run_phase(uvm_phase phase);
+        ahb_lite_seq_item req;
         reset_signals();
-        trans req;
         forever begin
             seq_item_port.get_next_item(req);
             drive_transfer(req);
@@ -37,7 +37,7 @@ class ahb_lite_driver extends uvm_driver #(ahb_lite_seq_item);
         wait (vif.driver_cb.HRESETn === 1'b1);
     endtask
     
-  virtual task drive_transfer(trans item);
+  virtual task drive_transfer(ahb_lite_seq_item item);
         `uvm_info("DRIVER", $sformatf("Starting transfer: %s", item.convert2string()), UVM_MEDIUM)
         
         // Wait for HREADY before starting new transfer
