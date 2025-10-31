@@ -1,5 +1,5 @@
 class ahb_lite_seq_item extends uvm_sequence_item;
-  `uvm_object_utils(trans)
+  `uvm_object_utils(ahb_lite_seq_item)
     
     // Address Phase
     rand bit [31:0]  haddr;
