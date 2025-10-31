@@ -1,7 +1,7 @@
 class ahb_lite_monitor extends uvm_monitor;
     `uvm_component_utils(ahb_lite_monitor)
     
-    virtual ahb_lite_if.monitor_mp vif;
+    virtual ahb_lite_if vif;
     uvm_analysis_port #(ahb_lite_seq_item) item_collected_port;
     
     function new(string name, uvm_component parent);
