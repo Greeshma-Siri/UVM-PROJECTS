@@ -1,7 +1,7 @@
 class ahb_lite_driver extends uvm_driver #(ahb_lite_seq_item);
     `uvm_component_utils(ahb_lite_driver)
     
-    virtual ahb_lite_if.master_mp vif;
+    virtual ahb_lite_if vif;
     
     function new(string name, uvm_component parent);
         super.new(name, parent);
@@ -9,8 +9,7 @@ class ahb_lite_driver extends uvm_driver #(ahb_lite_seq_item);
     
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
-        // FIX: Use the same type with modport for both set and get
-        if (!uvm_config_db#(virtual ahb_lite_if.master_mp)::get(this, "", "ahb_lite_vif", vif)) begin
+        if (!uvm_config_db#(virtual ahb_lite_if)::get(this, "", "ahb_lite_vif", vif)) begin
             `uvm_fatal("BUILD", "Cannot get AHB-Lite interface in driver")
         end
     endfunction
