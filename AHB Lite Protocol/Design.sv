@@ -14,7 +14,7 @@ module ahb_lite_slave (
 );
 
     // Internal memory
-    reg [31:0] memory [0:MEM_SIZE-1];
+    reg [31:0] memory [0:1023];
     
     // Internal signals
     reg [31:0] haddr_reg;
