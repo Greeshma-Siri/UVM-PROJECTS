@@ -23,7 +23,7 @@ class ahb_lite_seq_item extends uvm_sequence_item;
         cycles_before_ready inside {[0:3]};
     }
     
-  function new(string name = "trans");
+  function new(string name = "ahb_lite_seq_item");
         super.new(name);
     endfunction
     
