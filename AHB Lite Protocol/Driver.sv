@@ -40,7 +40,7 @@ class ahb_lite_driver extends uvm_driver #(ahb_lite_seq_item);
         `uvm_info("DRIVER", $sformatf("Starting transfer: %s", item.convert2string()), UVM_MEDIUM)
         
         // Wait for HREADY before starting new transfer
-        while (vif.driver_cb.HREADY !== 1'b1) begin
+        if (vif.driver_cb.HREADY !== 1'b1) begin
             @(vif.driver_cb);  // Wait for next clocking block event
         end
         
